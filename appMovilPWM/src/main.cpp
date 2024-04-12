@@ -8,10 +8,12 @@ const int freq = 5000;
 const int ledChannel = 0;
 const int resolution = 8;
 
-int incoming;
+int incoming = 0;
 
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
+
   ESP_BT.begin("ESP_APP");
   // configure LED PWM functionalitites
   ledcSetup(ledChannel, freq, resolution);
@@ -24,17 +26,9 @@ void loop() {
   // put your main code here, to run repeatedly:
   if (ESP_BT.available()) {
     incoming = ESP_BT.read();
-  }
-  for (int dutyCycle = 0; dutyCycle <= 255; dutyCycle++) {
-    // changing the LED brightness with PWM
-    ledcWrite(ledChannel, dutyCycle);
-    delay(15);
+    Serial.println(incoming);
   }
 
-  // decrease the LED brightness
-  for (int dutyCycle = 255; dutyCycle >= 0; dutyCycle--) {
-    // changing the LED brightness with PWM
-    ledcWrite(ledChannel, dutyCycle);
-    delay(15);
-  }
+  ledcWrite(ledChannel, incoming);
+  delay(50);
 }
