@@ -11,8 +11,8 @@
 #include <ESPAsyncWebServer.h>
 #include <WiFi.h>
 
-const char *ssid = "INFINITUM7C2C_2.4"; // CHANGE IT
-const char *password = "2638295219";    // CHANGE IT
+const char *ssid = ""; // CHANGE IT
+const char *password = "";    // CHANGE IT
 
 AsyncWebServer server(80);
 
